@@ -10,8 +10,8 @@
   "dependencies": {
     "@monorepo/api": "workspace:*",
     "@monorepo/common": "workspace:*",
-    "@reboot-dev/reboot": "0.37.2",
-    "@reboot-dev/reboot-api": "0.37.2",
+    "@reboot-dev/reboot": "0.38.1",
+    "@reboot-dev/reboot-api": "0.38.1",
     "prosemirror-model": "^1.23.0",
     "prosemirror-transform": "^1.1.0"
   }
