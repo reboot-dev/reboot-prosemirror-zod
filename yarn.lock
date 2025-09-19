@@ -746,8 +746,10 @@ __metadata:
     "@monorepo/common": "workspace:*"
     "@reboot-dev/reboot": "npm:0.38.1"
     "@reboot-dev/reboot-api": "npm:0.38.1"
+    "@reboot-dev/reboot-std": "npm:0.38.1"
     prosemirror-model: "npm:^1.23.0"
     prosemirror-transform: "npm:^1.1.0"
+    tsx: "npm:^4.19.2"
   languageName: unknown
   linkType: soft
 
@@ -975,6 +977,26 @@ __metadata:
     typescript: "npm:4.8.4"
     uuid: "npm:^9.0.1"
   checksum: 10c0/b4289b4774087ba3416026dae1313231ebdb14cc0b874e5804361f73e325011aabda7a6a27a8d5d26cf90bc0f744976549cfd7ad3cb7d63184fa6942c7997a3b
+  languageName: node
+  linkType: hard
+
+"@reboot-dev/reboot-std-api@npm:0.38.1":
+  version: 0.38.1
+  resolution: "@reboot-dev/reboot-std-api@npm:0.38.1"
+  dependencies:
+    "@scarf/scarf": "npm:1.4.0"
+  checksum: 10c0/288b3ff2c5d28c377c52fab0ce8e9da341ee013850044f65522eaeb5fd466ad0f5069eab1a825be7aa3db24484ae23db65c80140f08567812409b9c90c4ec3c0
+  languageName: node
+  linkType: hard
+
+"@reboot-dev/reboot-std@npm:0.38.1":
+  version: 0.38.1
+  resolution: "@reboot-dev/reboot-std@npm:0.38.1"
+  dependencies:
+    "@reboot-dev/reboot": "npm:0.38.1"
+    "@reboot-dev/reboot-std-api": "npm:0.38.1"
+    "@scarf/scarf": "npm:1.4.0"
+  checksum: 10c0/8a4968e6707c6735722a4aaa19cf1ff0c91f7c7695be6dba25e56f5be70be16f212e349dbd174c0805043189bbccff871b3a3990ea273eb7deddfd1f0726a392
   languageName: node
   linkType: hard
 

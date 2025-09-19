@@ -56,7 +56,7 @@ export const api = {
       checkpoint: {
         kind: "workflow",
         request: {},
-        response: {},
+        response: z.void(),
       },
     },
   },

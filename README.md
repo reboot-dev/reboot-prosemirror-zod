@@ -1,11 +1,34 @@
 # Reboot + ProseMirror (w/ Zod)
 
-(0) We suggest you use a GitHub Codespace (just click button below) _otherwise_ follow instructions [here](https://docs.reboot.dev/develop/overview) for getting your own environment set up.
+### Requirements
+- macOS or Linux
+- Node.js >= 20.10.0
+- Docker
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/reboot-dev/reboot-prosemirror-zod)
+Install packages (you may need to run `corepack enable` in order to run `yarn`):
 
-(0.5) If using a GitHub Codespace you'll need to run `corepack enable`.
+```console
+yarn
+```
 
-(1) `yarn`
+In one terminal run:
 
-(2) `yarn run dev:backend` in one terminal and `yarn run dev:web` in another terminal.
+```console
+yarn run dev:backend
+```
+
+And in another terminal:
+
+```console
+yarn run dev:web
+```
+
+To run the tests:
+
+```console
+yarn run test:backend
+```
+
+## TODO
+
+- [ ] Use [`prosemirror-collab-commit`](https://github.com/stepwisehq/prosemirror-collab-commit) instead of the "default" `prosemirror-collab`

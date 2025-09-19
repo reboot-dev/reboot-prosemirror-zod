@@ -6,6 +6,7 @@
     "dev:web": "cd web && yarn dev",
     "prepare:backend": "cd backend && yarn prepare",
     "dev:backend": "cd backend && yarn dev",
+    "test:backend": "cd backend && yarn run tsx src/test.ts",
     "build:web": "cd backend && yarn build"
   },
   "workspaces": [
