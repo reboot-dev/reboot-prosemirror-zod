@@ -141,7 +141,7 @@ export class AuthorityServicer extends Authority.Servicer {
       const commits = entries.map(({ value }) => decode(value));
 
       return {
-        changes: [...commits, ...this.state.commits],
+        commits: [...commits, ...this.state.commits],
       };
     }
 
