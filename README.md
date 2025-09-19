@@ -28,7 +28,3 @@ To run the tests:
 ```console
 yarn run test:backend
 ```
-
-## TODO
-
-- [ ] Use [`prosemirror-collab-commit`](https://github.com/stepwisehq/prosemirror-collab-commit) instead of the "default" `prosemirror-collab`
