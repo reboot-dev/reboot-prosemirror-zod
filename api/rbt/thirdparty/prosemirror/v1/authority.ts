@@ -1,17 +1,19 @@
 import { z } from "zod/v4";
 
-// A `Change` is a prosemirror `step` from a specific `client`.
-export const Change = z.object({
+export const Commit = z.object({
   // See prosemirror `Step` type which can be converted to/from JSON
   // via `step.toJSON()` and `step.fromJSON()` for storing and passing
   // around.
-  step: z.json().meta({ tag: 1 }),
+  steps: z.array(z.json()).meta({ tag: 1 }),
 
-  // The client that authored this change.
-  client: z.string().meta({ tag: 2 }),
+  // A unique ref identifying this commit.
+  ref: z.string().meta({ tag: 2 }),
+
+  // Version number this commit has been applied.
+  version: z.number().meta({ tag: 3 }),
 });
 
-export const Changes = z.array(Change);
+export const Commits = z.array(Commit);
 
 // See prosemirror `Node` type which is used to represent a "doc",
 // which can be converted to/from JSON via `node.toJSON()` and
@@ -21,7 +23,7 @@ export const Doc = z.json();
 export const api = {
   Authority: {
     state: {
-      changes: Changes.default(() => []).meta({ tag: 1 }),
+      commits: Commits.default(() => []).meta({ tag: 1 }),
       version: z.number().default(0).meta({ tag: 2 }),
     },
 
@@ -37,8 +39,7 @@ export const api = {
       apply: {
         kind: "writer",
         request: {
-          version: z.number().meta({ tag: 1 }),
-          changes: Changes.meta({ tag: 2 }),
+          commit: Commit.meta({ tag: 1 }),
         },
         response: z.void(),
       },
@@ -48,8 +49,7 @@ export const api = {
           sinceVersion: z.number().meta({ tag: 1 }),
         },
         response: {
-          version: z.number().meta({ tag: 1 }),
-          changes: Changes.meta({ tag: 2 }),
+          commits: Commits.meta({ tag: 1 }),
         },
       },
       // Internal `workflow`, not intended to get externally.

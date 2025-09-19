@@ -9,11 +9,12 @@ import {
   useEditorState,
 } from "@nytimes/react-prosemirror";
 import {
+  Commit,
   collab,
   getVersion,
-  receiveTransaction,
-  sendableSteps,
-} from "prosemirror-collab";
+  receiveCommitTransaction,
+  sendableCommit,
+} from "@stepwisehq/prosemirror-collab-commit/collab-commit"
 import { Node, Schema } from "prosemirror-model";
 import { EditorState } from "prosemirror-state";
 import { Step } from "prosemirror-transform";
@@ -45,17 +46,11 @@ function RebootProseMirrorAdaptor({
 
   useEffect(() => {
     if (!sending) {
-      let sendable = sendableSteps(state);
-      if (sendable) {
+      let commit = sendableCommit(state);
+      if (commit) {
         setSending(true);
         authority
-          .apply({
-            version: sendable.version,
-            changes: sendable.steps.map((step) => ({
-              step: step.toJSON(),
-              client: `${sendable.clientID}`,
-            })),
-          })
+          .apply({ commit: commit.toJSON() })
           .finally(() => {
             setSending(false);
           });
@@ -73,29 +68,18 @@ function RebootProseMirrorAdaptor({
   useEditorEffect(
     (view) => {
       if (response !== undefined) {
-        const { version, changes } = response;
+        const { commits } = response;
 
-        // Get out only the steps that we haven't applied locally.
-        //
-        // We need to do this because `authority.useChanges(...)` might get
-        // another response before we've called `setSinceVersion(...)`
-        // and thus we might get steps we've already applied which
-        // ProseMirror can't seem to handle.
-        const unappliedChanges = changes.slice(
-          getVersion(view.state) - version
-        );
-
-        if (unappliedChanges.length > 0) {
+        for (const commit of commits) {
           // TODO: calling `view.dispatch()` here seems to cause
           // 'Warning: flushSync was called from inside a lifecycle method';
           // what is the correct way to do this within the
           // 'react-prosemirror' library?
           Promise.resolve().then(() => {
             view.dispatch(
-              receiveTransaction(
+              receiveCommitTransaction(
                 view.state,
-                unappliedChanges.map(({ step }) => Step.fromJSON(schema, step)),
-                unappliedChanges.map(({ client }) => Number(client))
+                Commit.FromJSON(schema, commit)
               )
             );
             setSinceVersion(getVersion(view.state));

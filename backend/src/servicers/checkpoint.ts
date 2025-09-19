@@ -1,6 +1,7 @@
 import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt";
 import { INITIAL_DOC, SCHEMA } from "@monorepo/common/constants";
 import { ReaderContext, WriterContext, allow } from "@reboot-dev/reboot";
+import { assert } from "@reboot-dev/reboot-api";
 import { Node } from "prosemirror-model";
 import { Step } from "prosemirror-transform";
 
@@ -27,11 +28,17 @@ export class CheckpointServicer extends Checkpoint.Servicer {
       ? Node.fromJSON(SCHEMA, this.state.doc)
       : INITIAL_DOC;
 
-    for (const { step } of request.changes) {
-      doc = Step.fromJSON(SCHEMA, step).apply(doc).doc;
+    const steps = request.commits
+      .flatMap(({ steps }) => steps)
+      .map((step) => Step.fromJSON(SCHEMA, step));
+
+    let failed = false;
+    for (const step of steps) {
+      ({ doc, failed } = step.apply(doc));
+      assert(doc && !failed, "Should be able to `apply()` commits");
     }
 
     this.state.doc = doc.toJSON();
-    this.state.version += request.changes.length;
+    this.state.version += request.commits.length;
   }
 }

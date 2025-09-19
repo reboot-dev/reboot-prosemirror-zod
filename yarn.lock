@@ -747,6 +747,7 @@ __metadata:
     "@reboot-dev/reboot": "npm:0.38.1"
     "@reboot-dev/reboot-api": "npm:0.38.1"
     "@reboot-dev/reboot-std": "npm:0.38.1"
+    "@stepwisehq/prosemirror-collab-commit": "npm:^1.0.3"
     prosemirror-model: "npm:^1.23.0"
     prosemirror-transform: "npm:^1.1.0"
     tsx: "npm:^4.19.2"
@@ -1071,6 +1072,15 @@ __metadata:
   version: 1.0.0
   resolution: "@standard-schema/spec@npm:1.0.0"
   checksum: 10c0/a1ab9a8bdc09b5b47aa8365d0e0ec40cc2df6437be02853696a0e377321653b0d3ac6f079a8c67d5ddbe9821025584b1fb71d9cc041a6666a96f1fadf2ece15f
+  languageName: node
+  linkType: hard
+
+"@stepwisehq/prosemirror-collab-commit@npm:^1.0.3":
+  version: 1.0.5
+  resolution: "@stepwisehq/prosemirror-collab-commit@npm:1.0.5"
+  dependencies:
+    prosemirror-state: "npm:^1.0.0"
+  checksum: 10c0/62b71d877b2ebe992da4ae1e30fbc366b1feb613a024a85ce660f66e69c9a5e76eef32244ced1020a2e73cf30ef78875250aafe94945cd729f2f0380edfa961c
   languageName: node
   linkType: hard
 

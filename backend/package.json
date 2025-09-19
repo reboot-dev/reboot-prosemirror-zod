@@ -13,6 +13,7 @@
     "@reboot-dev/reboot": "0.38.1",
     "@reboot-dev/reboot-api": "0.38.1",
     "@reboot-dev/reboot-std": "0.38.1",
+    "@stepwisehq/prosemirror-collab-commit": "^1.0.3",
     "prosemirror-model": "^1.23.0",
     "prosemirror-transform": "^1.1.0",
     "tsx": "^4.19.2"
