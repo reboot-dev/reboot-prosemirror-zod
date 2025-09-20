@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { Commits, Doc } from "./authority";
+import { Commits, Doc } from "./authority.js";
 
 export const api = {
   Checkpoint: {

@@ -17,5 +17,8 @@
     "prosemirror-model": "^1.23.0",
     "prosemirror-transform": "^1.1.0",
     "tsx": "^4.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }

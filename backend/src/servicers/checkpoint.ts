@@ -1,5 +1,5 @@
-import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt";
-import { INITIAL_DOC, SCHEMA } from "@monorepo/common/constants";
+import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt.js";
+import { INITIAL_DOC, SCHEMA } from "@monorepo/common/constants.js";
 import { ReaderContext, WriterContext, allow } from "@reboot-dev/reboot";
 import { assert } from "@reboot-dev/reboot-api";
 import { Node } from "prosemirror-model";
