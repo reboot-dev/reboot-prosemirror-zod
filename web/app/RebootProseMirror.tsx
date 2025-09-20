@@ -8,6 +8,7 @@ import {
   useEditorEffect,
   useEditorState,
 } from "@nytimes/react-prosemirror";
+import { assert } from "@reboot-dev/reboot-api";
 import {
   Commit,
   collab,
@@ -28,7 +29,7 @@ function RebootProseMirrorAdaptor({
 }: {
   id: string;
   schema: Schema;
-  version?: number;
+  version: number;
   children: ReactNode;
 }) {
   // NOTE: while we could also pass `authority` in as a prop the
@@ -50,6 +51,8 @@ function RebootProseMirrorAdaptor({
       if (commit) {
         setSending(true);
         authority
+          // @ts-expect-error: `toJSON()` returns a record, but the
+          // type of `commit` is `z.json()`.
           .apply({ commit: commit.toJSON() })
           .finally(() => {
             setSending(false);
@@ -79,10 +82,14 @@ function RebootProseMirrorAdaptor({
             view.dispatch(
               receiveCommitTransaction(
                 view.state,
+                // @ts-expect-error: `FromJSON()` expects a record,
+                // but the type of `commit` is `z.json()`.
                 Commit.FromJSON(schema, commit)
               )
             );
-            setSinceVersion(getVersion(view.state));
+            const version = getVersion(view.state);
+            assert(version !== undefined, "Should have version after commit");
+            setSinceVersion(version);
           });
         }
       }
@@ -130,7 +137,7 @@ export default function RebootProseMirror({
   delete props.state;
   delete props.defaultState;
 
-  props.defaultState = EditorState.create({
+  const defaultState = EditorState.create({
     schema,
     doc: Node.fromJSON(schema, doc),
     plugins: [collab({ version })],
@@ -138,7 +145,7 @@ export default function RebootProseMirror({
 
   return (
     <>
-      <ProseMirror {...props}>
+      <ProseMirror {...props} defaultState={defaultState}>
         <RebootProseMirrorAdaptor id={id} schema={schema} version={version}>
           {children}
         </RebootProseMirrorAdaptor>
