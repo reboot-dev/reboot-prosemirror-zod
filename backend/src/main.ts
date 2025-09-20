@@ -1,9 +1,9 @@
-import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt";
-import { DOC_ID } from "@monorepo/common/constants";
+import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt.js";
+import { DOC_ID } from "@monorepo/common/constants.js";
 import { Application } from "@reboot-dev/reboot";
 import sortedMap from "@reboot-dev/reboot-std/collections/v1/sorted_map.js";
-import { AuthorityServicer } from "./servicers/authority";
-import { CheckpointServicer } from "./servicers/checkpoint";
+import { AuthorityServicer } from "./servicers/authority.js";
+import { CheckpointServicer } from "./servicers/checkpoint.js";
 
 const initialize = async (context) => {
   // Ensure the doc has been constructed.

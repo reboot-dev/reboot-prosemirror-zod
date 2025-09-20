@@ -1,7 +1,7 @@
-import { Commits } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority";
-import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt";
-import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt";
-import { SCHEMA } from "@monorepo/common/constants";
+import { Commits } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority.js";
+import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt.js";
+import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt.js";
+import { SCHEMA } from "@monorepo/common/constants.js";
 import {
   ReaderContext,
   WriterContext,

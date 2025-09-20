@@ -1,15 +1,15 @@
 // TO RUN THIS TEST:
 // yarn run tsx src/test.ts
 
-import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt";
-import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt";
+import { Authority } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/authority_rbt.js";
+import { Checkpoint } from "@monorepo/api/rbt/thirdparty/prosemirror/v1/checkpoint_rbt.js";
 import { Application, Reboot } from "@reboot-dev/reboot";
 import { sleep } from "@reboot-dev/reboot-api";
 import sortedMap from "@reboot-dev/reboot-std/collections/v1/sorted_map.js";
 import { strict as assert } from "node:assert";
 import { test } from "node:test";
-import { AuthorityServicer } from "./servicers/authority";
-import { CheckpointServicer } from "./servicers/checkpoint";
+import { AuthorityServicer } from "./servicers/authority.js";
+import { CheckpointServicer } from "./servicers/checkpoint.js";
 
 test("Reboot Prosemirror", async (t) => {
   let rbt: Reboot;
