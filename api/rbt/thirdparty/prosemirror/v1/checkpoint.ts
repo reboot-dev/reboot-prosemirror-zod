@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { Commits, Doc } from "./authority.js";
+import { Changes, Doc } from "./authority";
 
 export const api = {
   Checkpoint: {
@@ -20,7 +20,7 @@ export const api = {
       update: {
         kind: "writer",
         request: {
-          commits: Commits.default(() => []).meta({ tag: 1 }),
+          changes: Changes.default(() => []).meta({ tag: 1 }),
           client: z.string().optional().meta({ tag: 2 }),
         },
         response: z.void(),

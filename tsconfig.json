@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "moduleResolution": "nodenext",
-    "module": "nodenext",
+    "moduleResolution": "node",
     "target": "es2020",
     "rootDir": ".",
     "sourceMap": true,

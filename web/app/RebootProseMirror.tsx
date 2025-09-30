@@ -8,14 +8,12 @@ import {
   useEditorEffect,
   useEditorState,
 } from "@nytimes/react-prosemirror";
-import { assert } from "@reboot-dev/reboot-api";
 import {
-  Commit,
   collab,
   getVersion,
-  receiveCommitTransaction,
-  sendableCommit,
-} from "@stepwisehq/prosemirror-collab-commit/collab-commit"
+  receiveTransaction,
+  sendableSteps,
+} from "prosemirror-collab";
 import { Node, Schema } from "prosemirror-model";
 import { EditorState } from "prosemirror-state";
 import { Step } from "prosemirror-transform";
@@ -29,7 +27,7 @@ function RebootProseMirrorAdaptor({
 }: {
   id: string;
   schema: Schema;
-  version: number;
+  version?: number;
   children: ReactNode;
 }) {
   // NOTE: while we could also pass `authority` in as a prop the
@@ -47,13 +45,17 @@ function RebootProseMirrorAdaptor({
 
   useEffect(() => {
     if (!sending) {
-      let commit = sendableCommit(state);
-      if (commit) {
+      let sendable = sendableSteps(state);
+      if (sendable) {
         setSending(true);
         authority
-          // @ts-expect-error: `toJSON()` returns a record, but the
-          // type of `commit` is `z.json()`.
-          .apply({ commit: commit.toJSON() })
+          .apply({
+            version: sendable.version,
+            changes: sendable.steps.map((step) => ({
+              step: step.toJSON(),
+              client: `${sendable.clientID}`,
+            })),
+          })
           .finally(() => {
             setSending(false);
           });
@@ -71,25 +73,32 @@ function RebootProseMirrorAdaptor({
   useEditorEffect(
     (view) => {
       if (response !== undefined) {
-        const { commits } = response;
+        const { version, changes } = response;
 
-        for (const commit of commits) {
+        // Get out only the steps that we haven't applied locally.
+        //
+        // We need to do this because `authority.useChanges(...)` might get
+        // another response before we've called `setSinceVersion(...)`
+        // and thus we might get steps we've already applied which
+        // ProseMirror can't seem to handle.
+        const unappliedChanges = changes.slice(
+          getVersion(view.state) - version
+        );
+
+        if (unappliedChanges.length > 0) {
           // TODO: calling `view.dispatch()` here seems to cause
           // 'Warning: flushSync was called from inside a lifecycle method';
           // what is the correct way to do this within the
           // 'react-prosemirror' library?
           Promise.resolve().then(() => {
             view.dispatch(
-              receiveCommitTransaction(
+              receiveTransaction(
                 view.state,
-                // @ts-expect-error: `FromJSON()` expects a record,
-                // but the type of `commit` is `z.json()`.
-                Commit.FromJSON(schema, commit)
+                unappliedChanges.map(({ step }) => Step.fromJSON(schema, step)),
+                unappliedChanges.map(({ client }) => Number(client))
               )
             );
-            const version = getVersion(view.state);
-            assert(version !== undefined, "Should have version after commit");
-            setSinceVersion(version);
+            setSinceVersion(getVersion(view.state));
           });
         }
       }
@@ -137,7 +146,7 @@ export default function RebootProseMirror({
   delete props.state;
   delete props.defaultState;
 
-  const defaultState = EditorState.create({
+  props.defaultState = EditorState.create({
     schema,
     doc: Node.fromJSON(schema, doc),
     plugins: [collab({ version })],
@@ -145,7 +154,7 @@ export default function RebootProseMirror({
 
   return (
     <>
-      <ProseMirror {...props} defaultState={defaultState}>
+      <ProseMirror {...props}>
         <RebootProseMirrorAdaptor id={id} schema={schema} version={version}>
           {children}
         </RebootProseMirrorAdaptor>
