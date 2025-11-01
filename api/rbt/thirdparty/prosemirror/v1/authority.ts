@@ -1,3 +1,10 @@
+import {
+  type API,
+  reader,
+  transaction,
+  workflow,
+  writer,
+} from "@reboot-dev/reboot-api";
 import { z } from "zod/v4";
 
 // A `Change` is a prosemirror `step` from a specific `client`.
@@ -18,46 +25,43 @@ export const Changes = z.array(Change);
 // `node.fromJSON()` for storing and passing around.
 export const Doc = z.json();
 
-export const api = {
-  Authority: {
-    state: {
-      changes: Changes.default(() => []).meta({ tag: 1 }),
-      version: z.number().default(0).meta({ tag: 2 }),
-    },
-
-    methods: {
-      create: {
-        kind: "transaction",
-        request: {},
-        response: {
-          doc: Doc.meta({ tag: 1 }),
-          version: z.number().meta({ tag: 2 }),
-        },
-      },
-      apply: {
-        kind: "writer",
-        request: {
-          version: z.number().meta({ tag: 1 }),
-          changes: Changes.meta({ tag: 2 }),
-        },
-        response: z.void(),
-      },
-      changes: {
-        kind: "reader",
-        request: {
-          sinceVersion: z.number().meta({ tag: 1 }),
-        },
-        response: {
-          version: z.number().meta({ tag: 1 }),
-          changes: Changes.meta({ tag: 2 }),
-        },
-      },
-      // Internal `workflow`, not intended to get externally.
-      checkpoint: {
-        kind: "workflow",
-        request: {},
-        response: {},
-      },
-    },
+export const Authority = {
+  state: {
+    changes: Changes.default(() => []).meta({ tag: 1 }),
+    version: z.number().default(0).meta({ tag: 2 }),
   },
+  methods: {
+    create: transaction({
+      request: {},
+      response: {
+        doc: Doc.meta({ tag: 1 }),
+        version: z.number().meta({ tag: 2 }),
+      },
+    }),
+    apply: writer({
+      request: {
+        version: z.number().meta({ tag: 1 }),
+        changes: Changes.meta({ tag: 2 }),
+      },
+      response: z.void(),
+    }),
+    changes: reader({
+      request: {
+        sinceVersion: z.number().meta({ tag: 1 }),
+      },
+      response: {
+        version: z.number().meta({ tag: 1 }),
+        changes: Changes.meta({ tag: 2 }),
+      },
+    }),
+    // Internal `workflow`, not intended to get externally.
+    checkpoint: workflow({
+      request: {},
+      response: {},
+    }),
+  },
+};
+
+export const api: API = {
+  Authority,
 };

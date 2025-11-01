@@ -8,10 +8,11 @@
     "prepare": "rbt --help"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "1.10.1",
     "@monorepo/api": "workspace:*",
     "@monorepo/common": "workspace:*",
-    "@reboot-dev/reboot": "0.38.4",
-    "@reboot-dev/reboot-api": "0.38.4",
+    "@reboot-dev/reboot": "0.39.0",
+    "@reboot-dev/reboot-api": "0.39.0",
     "prosemirror-model": "^1.23.0",
     "prosemirror-transform": "^1.1.0"
   }
