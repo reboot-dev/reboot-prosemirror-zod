@@ -45,10 +45,10 @@ serve run --name=docs
 # Tell `rbt serve` that this is a Node.js application.
 serve run --nodejs
 
-# The number of partitions of our data to create. Each partition runs as a
-# separate process, and so increasing the partition count requires more
-# cores but also allows the application to use more cores.
-serve run --partitions=4
+# The number of servers to run. Each server runs as a separate process,
+# and so increasing the server count requires more cores but also allows
+# the application to use more cores.
+serve run --servers=4
 
 # Leave TLS termination to the external load balancer; expose a non-SSL port to
 # that loadbalancer.
