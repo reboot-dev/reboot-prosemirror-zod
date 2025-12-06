@@ -12,7 +12,6 @@ import {
 import { assert, errors_pb } from "@reboot-dev/reboot-api";
 import { Node } from "prosemirror-model";
 import { Step } from "prosemirror-transform";
-import { z } from "zod/v4";
 
 export class CheckpointServicer extends Checkpoint.Servicer {
   authorizer() {
@@ -32,7 +31,7 @@ export class CheckpointServicer extends Checkpoint.Servicer {
   async update(
     context: WriterContext,
     request: Checkpoint.UpdateRequest
-  ): Promise<Checkpoint.UpdateResponse> {
+  ): Promise<void> {
     let doc = this.state.doc
       ? Node.fromJSON(SCHEMA, this.state.doc)
       : INITIAL_DOC;
