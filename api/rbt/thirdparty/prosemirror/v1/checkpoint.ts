@@ -1,4 +1,4 @@
-import { type API, reader, writer } from "@reboot-dev/reboot-api";
+import { reader, writer } from "@reboot-dev/reboot-api";
 import { z } from "zod/v4";
 import { Changes, Doc } from "./authority";
 
@@ -25,6 +25,6 @@ export const Checkpoint = {
   },
 };
 
-export const api: API = {
+export const api = {
   Checkpoint,
 };
