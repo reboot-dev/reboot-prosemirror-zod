@@ -746,8 +746,8 @@ __metadata:
     "@bufbuild/protobuf": "npm:1.10.1"
     "@monorepo/api": "workspace:*"
     "@monorepo/common": "workspace:*"
-    "@reboot-dev/reboot": "npm:0.42.0"
-    "@reboot-dev/reboot-api": "npm:0.42.0"
+    "@reboot-dev/reboot": "npm:0.43.0"
+    "@reboot-dev/reboot-api": "npm:0.43.0"
     prosemirror-model: "npm:^1.23.0"
     prosemirror-transform: "npm:^1.1.0"
   languageName: unknown
@@ -772,7 +772,7 @@ __metadata:
     "@monorepo/api": "workspace:*"
     "@monorepo/common": "workspace:*"
     "@nytimes/react-prosemirror": "npm:^0.6.2"
-    "@reboot-dev/reboot-react": "npm:0.42.0"
+    "@reboot-dev/reboot-react": "npm:0.43.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
@@ -952,25 +952,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reboot-dev/reboot-api@npm:0.42.0":
-  version: 0.42.0
-  resolution: "@reboot-dev/reboot-api@npm:0.42.0"
+"@reboot-dev/reboot-api@npm:0.43.0":
+  version: 0.43.0
+  resolution: "@reboot-dev/reboot-api@npm:0.43.0"
   dependencies:
     "@scarf/scarf": "npm:1.4.0"
     typescript: "npm:5.4.5"
     zod: "npm:^3.25.51"
   peerDependencies:
     "@bufbuild/protobuf": 1.10.1
-  checksum: 10c0/424ef708e7e056690e133e54d0687f7af8c15cac01e3a76b40298f4bc277ec8afd84977e040ea8244d173d0665f56dd118d9dc376abedee631cb15f4001e5454
+  checksum: 10c0/5bc1d1da62cde726a32b6b3d8e67330210b64e36f7cddca0dc43bce2264988d38e57faf8b9f595baf5b61ed0f6f43face217781f82cbe4edfa50a20cf9604f25
   languageName: node
   linkType: hard
 
-"@reboot-dev/reboot-react@npm:0.42.0":
-  version: 0.42.0
-  resolution: "@reboot-dev/reboot-react@npm:0.42.0"
+"@reboot-dev/reboot-react@npm:0.43.0":
+  version: 0.43.0
+  resolution: "@reboot-dev/reboot-react@npm:0.43.0"
   dependencies:
-    "@reboot-dev/reboot-api": "npm:0.42.0"
-    "@reboot-dev/reboot-web": "npm:0.42.0"
+    "@reboot-dev/reboot-api": "npm:0.43.0"
+    "@reboot-dev/reboot-web": "npm:0.43.0"
     "@scarf/scarf": "npm:1.4.0"
     "@types/uuid": "npm:^9.0.4"
     js-sha1: "npm:0.7.0"
@@ -981,15 +981,15 @@ __metadata:
     "@bufbuild/protobuf": 1.10.1
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
-  checksum: 10c0/eb191e3f85d0e31fe92a87b3072d3ad9fe32fb68c0e1189cd0cf5611b4733fd861b6de93ea8c1482e6d6614dd93f816d2e6b47d99ee3132a4870d51dacb4cf88
+  checksum: 10c0/2898a19238a2df337a9107c25ba0df0d418bc2efbf5d6be61863bd13f329d2893ff455c4bcf925bc5bbcf4e338eb12b385cfb6bd21db36bcc1ef07f00f95c3a3
   languageName: node
   linkType: hard
 
-"@reboot-dev/reboot-web@npm:0.42.0":
-  version: 0.42.0
-  resolution: "@reboot-dev/reboot-web@npm:0.42.0"
+"@reboot-dev/reboot-web@npm:0.43.0":
+  version: 0.43.0
+  resolution: "@reboot-dev/reboot-web@npm:0.43.0"
   dependencies:
-    "@reboot-dev/reboot-api": "npm:0.42.0"
+    "@reboot-dev/reboot-api": "npm:0.43.0"
     "@scarf/scarf": "npm:1.4.0"
     "@types/uuid": "npm:^9.0.4"
     js-sha1: "npm:0.7.0"
@@ -999,17 +999,17 @@ __metadata:
     uuid: "npm:^9.0.1"
   peerDependencies:
     "@bufbuild/protobuf": 1.10.1
-  checksum: 10c0/44d4aabfc07246ccc26f3a3b700732deea366a77cbafb6849527aa3ade18a455d733248cda77a53f990a7cd263c87398a63ea04b50f70cf757c644f75e475a9c
+  checksum: 10c0/a79c96398f5f64b31ba1f29c031b4a2847ade79c71a00794155995fb31bce5ae185389759d133d2bfd92239f37967c811db4c497b7be1fd24b8cba766d2104cb
   languageName: node
   linkType: hard
 
-"@reboot-dev/reboot@npm:0.42.0":
-  version: 0.42.0
-  resolution: "@reboot-dev/reboot@npm:0.42.0"
+"@reboot-dev/reboot@npm:0.43.0":
+  version: 0.43.0
+  resolution: "@reboot-dev/reboot@npm:0.43.0"
   dependencies:
     "@bufbuild/protoc-gen-es": "npm:1.10.1"
     "@bufbuild/protoplugin": "npm:1.10.1"
-    "@reboot-dev/reboot-api": "npm:0.42.0"
+    "@reboot-dev/reboot-api": "npm:0.43.0"
     "@scarf/scarf": "npm:1.4.0"
     "@standard-schema/spec": "npm:1.0.0"
     chalk: "npm:^4.1.2"
@@ -1030,7 +1030,7 @@ __metadata:
     rbt: rbt.js
     rbt-esbuild: rbt-esbuild.js
     zod-to-proto: zod-to-proto.js
-  checksum: 10c0/7020d4a8b3a50fe48180ffbd78981ceffa883f36f936dafb6116148ee2a59875ebc3fa8919d46e309fcd86809746e0b7a22c63528a56fe3d4195a80fe7f1a1a2
+  checksum: 10c0/46ba6da691545bfcee9307136d77f94ac72a4f9320664c31a76913ff1a9814c76b90974529d42b5c61048504950a383238743029d18ec03deddb5498090e9b85
   languageName: node
   linkType: hard
 
