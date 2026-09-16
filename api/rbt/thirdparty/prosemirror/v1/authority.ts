@@ -1,4 +1,10 @@
-import { reader, transaction, workflow, writer } from "@reboot-dev/reboot-api";
+import {
+  reader,
+  transaction,
+  workflow,
+  writer,
+  shared,
+} from "@reboot-dev/reboot-api";
 import { z } from "zod/v4";
 
 // A `Change` is a prosemirror `step` from a specific `client`.
@@ -26,6 +32,7 @@ export const Authority = {
   },
   methods: {
     create: transaction({
+      mode: shared(),
       request: {},
       response: {
         doc: Doc.meta({ tag: 1 }),
